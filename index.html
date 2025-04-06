@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="VideoPASTA: 7K Preference Pairs That Matter for Video-LLM Alignment">
+  <meta name="keywords" content="VideoPASTA, Video-LLM, Preference Optimization, Video Understanding, DPO, Alignment, Adversarial Examples">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VideoPASTA: 7K Preference Pairs That Matter for Video-LLM Alignment</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+
+  <style>
+    .placeholder-box {
+      padding: 10px;
+      margin: 10px 0;
+      text-align: center;
+      color: #777;
+    }
+    .placeholder-box img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    /* Animated gradient title CSS */
+    .animated-gradient-title {
+      background-image: linear-gradient(to right, #ff7e5f, #feb47b, #4a90e2, #8e44ad, #c86dd7);
+      background-size: 300% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: gradient-animation 5s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @keyframes gradient-animation {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+    /* End Animated gradient title CSS */
+
+    /* Icon Image Styling & Animation CSS */
+    .title-icon-image {
+       height: 1em; /* Match height to title font size */
+       width: auto; /* Maintain aspect ratio */
+       vertical-align: middle; /* Align with title */
+       margin-left: 10px; /* Add some space next to title */
+       display: inline-block; /* Needed for animation */
+       animation: wobble 2s ease-in-out infinite;
+    }
+
+    @keyframes wobble {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-5deg) scale(1.1); }
+      75% { transform: rotate(5deg) scale(0.9); }
+    }
+    /* End Icon Image Styling & Animation CSS */
+
+  </style>
+
+</head>
+
+<body> <nav class="navbar" role="navigation" aria-label="main navigation">
+     </nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title is-bold">
+             <span class="animated-gradient-title">VideoPASTA</span><img src="static/images/pasta.png" alt="VideoPASTA Icon" class="title-icon-image">
+          </h1>
+           <h2 class="subtitle is-3 publication-subtitle">
+             7K Preference Pairs That Matter for Video-LLM Alignment
+           </h2>
+           <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://yogkul2000.github.io/">Yogesh Kulkarni</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://www.pooyanfazli.com/">Pooyan Fazli</a><sup style="color:#6fbf73;">1</sup></span>
+             </div>
+
+          <div class="is-size-5 publication-authors">
+             <span class="author-block"><sup style="color:#6fbf73;">1</sup>Arizona State University</span><br>
+           </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                 <a href="#" class="external-link button is-normal is-rounded is-dark"> <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+               <span class="link-block">
+                 <a href="#" class="external-link button is-normal is-rounded is-dark"> <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+               <span class="link-block">
+                 <a href="#" class="external-link button is-normal is-rounded is-dark"> <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+       <div class="placeholder-box">
+         <img src="static/images/pipeline.png" alt="VideoPASTA Pipeline Overview">
+       </div>
+       <p> Overview of the VideoPASTA framework. It generates targeted adversarial examples for spatial misalignment, temporal incoherence, and cross-frame disconnection. These, along with preferred responses, are filtered and used for Direct Preference Optimization (DPO) to align Video-LLMs more effectively. </p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Video-language models (Video-LLMs) excel at understanding video content but struggle with spatial relationships, temporal ordering, and cross-frame continuity. To address these limitations, we introduce VideoPASTA (Preference Alignment with Spatio-Temporal-Cross Frame Adversaries), a framework that enhances Video-LLMs through targeted preference optimization.
+          </p>
+          <p>
+            VideoPASTA trains models to distinguish accurate video representations from carefully generated adversarial examples that deliberately violate spatial, temporal, or cross-frame relations. By applying Direct Preference Optimization to just 7,020 preference pairs, VideoPASTA learns robust representations that capture fine-grained spatial relationships and long-range temporal dynamics.
+          </p>
+           <p>
+            Experiments on standard video benchmarks show significant relative performance gains of 3.05% on VideoMME, 1.97% on NeXTQA, and 1.31% on Long VideoBench, over the baseline Qwen2.5-VL model. These results demonstrate that targeted alignment, rather than massive pretraining or architectural modifications, effectively addresses core video-language challenges. Notably, VideoPASTA achieves these improvements without human annotation or captioning, relying on just 32-frame sampling, compared to the 96-frame, multi-GPU setups of prior work. This efficiency makes our approach a scalable, plug-and-play solution.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Method</h2>
+              <div class="content has-text-justified">
+                <p>
+                  VideoPASTA is a DPO-based framework that aligns video-language models using structured preference optimization. It leverages a dataset D = {(V, q, r⁺, r⁻)}, where V is the video, q is the query, r⁺ is the preferred aligned response, and r⁻ is a targeted adversarial response designed to introduce misalignment.
+                </p>
+                <p>
+                    The core process involves generating preference pairs targeting three key failure modes:
+                </p>
+                <ol>
+                    <li><b>Spatial Misalignment Generation:</b> Uses InternVL2.5-38B to generate spatial queries (e.g., occlusion, depth, relative position). Preferred responses are generated from the baseline model using dense (32fps) sampling. Adversarial responses are generated using sparse (1fps) sampling and prompts that induce spatial errors (e.g., claiming occluded objects are visible, or all objects are equidistant).</li>
+                    <li><b>Temporal Incoherence Generation:</b> Generates temporal queries (e.g., event order, transitions, causality). Preferred responses use native frame rate sampling. Adversarial responses use sparse (1fps) sampling and prompts that distort time (e.g., describing sequential actions as simultaneous, ignoring transitions).</li>
+                    <li><b>Cross-frame Disconnection Generation:</b> Generates queries about long-range continuity (e.g., object/character persistence, setting changes). Preferred responses use uniform sampling across the video. Adversarial responses use sparse (1fps) sampling and prompts that break continuity (e.g., treating the same object/character in different scenes as unrelated).</li>
+                    <li><b>Preference Data Filtering:</b> Generated adversarial examples (3 per preferred response) are filtered using Qwen2.5-32B to ensure they introduce genuine, targeted misalignments and are distinct from the preferred responses. Preferred responses are also sanity-checked. This yields ~7k high-quality pairs.</li>
+                    <li><b>Optimization:</b> The model is trained using Direct Preference Optimization (DPO) on the filtered pairs. The DPO loss is computed separately for spatial, temporal, and cross-frame subsets and combined with weights.</li>
+                </ol>
+                <p>This targeted approach enables robust alignment across multiple dimensions of video understanding.</p>
+             </div>
+            </div>
+          </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-4 has-text-centered">Main Benchmark Results</h3>
+        <div class="content has-text-justified">
+           <p>
+               VideoPASTA demonstrates significant improvements over its foundation model (Qwen2.5-VL) and outperforms state-of-the-art methods on several benchmarks. Key relative gains include +3.05% on VideoMME, +1.97% on NeXTQA, +1.69% on MVBench, and +1.31% on Long VideoBench. It achieves these results with only 7k preference pairs, contrasting with methods like Hound-DPO (17k pairs) and TPO (10k pairs). VideoPASTA outperforms LLaVA-Hound-DPO and i-SRT on all eight benchmarks and LLaVA-Video-TPO on seven.
+           </p>
+           <div class="placeholder-box">
+               <img src="static/images/main_table.png" alt="Main Benchmark Results (Table 1)">
+           </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-4 has-text-centered">Analysis & Ablation Studies</h3>
+          <div class="content has-text-justified">
+            <p>
+                Further analysis validates the effectiveness of VideoPASTA's components:
+            </p>
+            <ul>
+                <li><b>DPO Training Dynamics:</b> The DPO training effectively learns preference boundaries, with reward accuracy stabilizing and a clear gap forming between chosen (preferred) and rejected (adversarial) rewards.</li>
+                <li><b>Targeted Adversarial Sampling:</b> Training on samples targeting specific failure modes (spatial, temporal, cross-frame) provides complementary benefits. Combining all three yields the best overall performance, significantly improving temporal (+29.14%) and spatial (+23.58%) reasoning over the baseline.</li>
+                <li><b>Robustness:</b> VideoPASTA significantly outperforms baselines in identifying and rejecting adversarial questions and options designed to probe spatial, temporal, and cross-frame weaknesses, especially in temporal reasoning (+41.19%).</li>
+            </ul>
+            <div class="placeholder-box">
+                  <img src="static/images/dpo_graph.png" alt="DPO Training Dynamics (Figure 4)">
+             </div>
+             <div class="placeholder-box">
+                  <img src="static/images/table2.png" alt="Effect of Targeted Failure Modes (Table 2)">
+             </div>
+              <div class="placeholder-box">
+                  <img src="static/images/table6.png" alt="Performance on Adversarial QA Samples (Table 6)">
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-4 has-text-centered">Qualitative Examples</h3>
+          <div class="content has-text-justified">
+             <p>
+                Qualitative examples demonstrate VideoPASTA's improved understanding compared to the baseline Qwen2.5-VL. It correctly identifies spatial relationships (e.g., person clinging to aircraft vs. leaving), accurately captures temporal sequences in actions (e.g., cake decoration steps), and successfully connects narrative elements across frames (e.g., relating a disclaimer to illustrations of heat stress).
+             </p>
+             <div class="placeholder-box">
+                 <img src="static/images/qualitative.png" alt="Qualitative Comparison Examples (Figure 3)">
+             </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">BibTeX</h2>
+    <pre><code>@article{kulkarni2025videopasta,
+      title={VideoPASTA: 7K Preference Pairs That Matter for Video-LLM Alignment}, 
+      author={Yogesh Kulkarni and Pooyan Fazli},
+      year={2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+     </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            Website template adapted from <a href="https://nerfies.github.io/">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  if ($navbarBurgers.length > 0) {
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+        el.classList.toggle('is-active');
+        if ($target) {
+            $target.classList.toggle('is-active');
+        }
+      });
+    });
+  }
+
+  // Carousel functionality might be added here if needed for results
+  // const carousels = document.querySelectorAll('#results-carousel');
+  // if (carousels.length > 0) {
+  //     carousels.forEach(carousel => {
+  //         bulmaCarousel.attach(carousel, {
+  //             slidesToScroll: 1,
+  //             slidesToShow: 1,
+  //             infinite: true,
+  //             autoplay: true,
+  //             autoplaySpeed: 5000,
+  //         });
+  //     });
+  // }
+});
+</script>
+
+</body>
+</html>
