@@ -76,9 +76,29 @@
 </head>
 
 <body> <nav class="navbar" role="navigation" aria-label="main navigation">
-     </nav>
-
-<section class="hero">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+         <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://people-robots.github.io/VideoSAVi/">
+               VideoSAVi
+             </a>
+             </div>
+        </div>
+       </div>
+    </div>
+  </nav>
+  <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -293,19 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Carousel functionality might be added here if needed for results
-  // const carousels = document.querySelectorAll('#results-carousel');
-  // if (carousels.length > 0) {
-  //     carousels.forEach(carousel => {
-  //         bulmaCarousel.attach(carousel, {
-  //             slidesToScroll: 1,
-  //             slidesToShow: 1,
-  //             infinite: true,
-  //             autoplay: true,
-  //             autoplaySpeed: 5000,
-  //         });
-  //     });
-  // }
 });
 </script>
 
