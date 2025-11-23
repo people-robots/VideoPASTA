@@ -35,6 +35,27 @@
         display: block;
         margin: 0 auto;
     }
+    
+    /* MODIFIED: Optimized for readability */
+    .result-image {
+        width: 100%;     /* Force image to take full width of the box */
+        height: auto;    /* Maintain aspect ratio */
+        object-fit: contain;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+    
+    .box-gray {
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        padding: 1.5rem; /* Increased padding for breathing room */
+        height: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     /* Animated gradient title CSS */
     .animated-gradient-title {
       background-image: linear-gradient(to right, #ff7e5f, #feb47b, #4a90e2, #8e44ad, #c86dd7);
@@ -96,6 +117,9 @@
              <a class="navbar-item" href="https://people-robots.github.io/AVATAR/">
                AVATAR
              </a>
+             <a class="navbar-item" href="https://people-robots.github.io/EgoVITA/">
+               EgoVITA
+             </a>
              </div>
         </div>
        </div>
@@ -126,7 +150,7 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                 <a href="https://arxiv.org/pdf/2504.14096" class="external-link button is-normal is-rounded is-dark"> <span class="icon">
+                 <a href="https://aclanthology.org/2025.emnlp-main.1647.pdf" class="external-link button is-normal is-rounded is-dark"> <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
@@ -158,7 +182,7 @@
   <div class="container is-max-desktop">
     <div class="content has-text-centered">
        <div class="placeholder-box">
-         <img src="static/images/pipeline.png" alt="VideoPASTA Pipeline Overview">
+         <img src="static/images/pipeline.png" alt="VideoPASTA Pipeline Overview" style="width: 80%;">
        </div>
        <p> Overview of the VideoPASTA framework. It generates targeted adversarial examples for spatial misalignment, temporal incoherence, and cross-frame disconnection. These, along with preferred responses, are filtered and used for Direct Preference Optimization (DPO) to align Video-LLMs more effectively. </p>
     </div>
@@ -225,7 +249,7 @@
                VideoPASTA demonstrates significant improvements over its foundation model (Qwen2.5-VL) and outperforms state-of-the-art methods on several benchmarks. Key relative gains include +3.05% on VideoMME, +1.97% on NeXTQA, +1.69% on MVBench, and +1.31% on Long VideoBench. It achieves these results with only 7k preference pairs, contrasting with methods like Hound-DPO (17k pairs) and TPO (10k pairs). VideoPASTA outperforms LLaVA-Hound-DPO and i-SRT on all eight benchmarks and LLaVA-Video-TPO on seven.
            </p>
            <div class="placeholder-box">
-               <img src="static/images/main_table.png" alt="Main Benchmark Results (Table 1)">
+               <img src="static/images/main_table.png" alt="Main Benchmark Results (Table 1)" style="width: 100%;">
            </div>
         </div>
       </div>
@@ -236,22 +260,37 @@
           <h3 class="title is-4 has-text-centered">Analysis & Ablation Studies</h3>
           <div class="content has-text-justified">
             <p>
-                Further analysis validates the effectiveness of VideoPASTA's components:
+                Further analysis validates the effectiveness of VideoPASTA's components including training dynamics, the necessity of targeted failure modes, and robustness against adversarial attacks.
             </p>
-            <ul>
-                <li><b>DPO Training Dynamics:</b> The DPO training effectively learns preference boundaries, with reward accuracy stabilizing and a clear gap forming between chosen (preferred) and rejected (adversarial) rewards.</li>
-                <li><b>Targeted Adversarial Sampling:</b> Training on samples targeting specific failure modes (spatial, temporal, cross-frame) provides complementary benefits. Combining all three yields the best overall performance, significantly improving temporal (+29.14%) and spatial (+23.58%) reasoning over the baseline.</li>
-                <li><b>Robustness:</b> VideoPASTA significantly outperforms baselines in identifying and rejecting adversarial questions and options designed to probe spatial, temporal, and cross-frame weaknesses, especially in temporal reasoning (+41.19%).</li>
-            </ul>
-            <div class="placeholder-box">
-                  <img src="static/images/dpo_graph.png" alt="DPO Training Dynamics (Figure 4)">
-             </div>
-             <div class="placeholder-box">
-                  <img src="static/images/table2.png" alt="Effect of Targeted Failure Modes (Table 2)">
-             </div>
-              <div class="placeholder-box">
-                  <img src="static/images/table6.png" alt="Performance on Adversarial QA Samples (Table 6)">
-              </div>
+            
+            <div class="columns is-centered is-multiline">
+                <div class="column is-6">
+                    <div class="box-gray">
+                        <h4 class="title is-6 has-text-centered">Training Dynamics</h4>
+                        <img src="static/images/dpo_graph.png" alt="DPO Training Dynamics" class="result-image">
+                        <p class="is-size-7">DPO training effectively learns preference boundaries with stabilizing reward accuracy.</p>
+                    </div>
+                </div>
+
+                <div class="column is-6">
+                    <div class="box-gray">
+                        <h4 class="title is-6 has-text-centered">Ablation of Modes</h4>
+                        <img src="static/images/table2.png" alt="Effect of Targeted Failure Modes" class="result-image">
+                        <p class="is-size-7">Combining all three targeted modes yields the best overall performance improvement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="box-gray">
+                        <h4 class="title is-6 has-text-centered">Adversarial QA Performance</h4>
+                        <img src="static/images/table6.png" alt="Performance on Adversarial QA Samples" class="result-image">
+                        <p class="is-size-7">VideoPASTA significantly outperforms baselines in rejecting adversarial options across all categories.</p>
+                    </div>
+                </div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -264,7 +303,7 @@
                 Qualitative examples demonstrate VideoPASTA's improved understanding compared to the baseline Qwen2.5-VL. It correctly identifies spatial relationships (e.g., person clinging to aircraft vs. leaving), accurately captures temporal sequences in actions (e.g., cake decoration steps), and successfully connects narrative elements across frames (e.g., relating a disclaimer to illustrations of heat stress).
              </p>
              <div class="placeholder-box">
-                 <img src="static/images/qualitative.png" alt="Qualitative Comparison Examples (Figure 3)">
+                 <img src="static/images/qualitative.png" alt="Qualitative Comparison Examples (Figure 3)" style="width: 100%;">
              </div>
           </div>
         </div>
@@ -277,10 +316,12 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title is-3 has-text-centered">BibTeX</h2>
-    <pre><code>@article{kulkarni2025videopasta,
-      title={VideoPASTA: 7K Preference Pairs That Matter for Video-LLM Alignment}, 
-      author={Yogesh Kulkarni and Pooyan Fazli},
-      year={2025},
+    <pre><code>@inproceedings{kulkarni-fazli-2025-videopasta,
+    title = "VideoPASTA: 7K Preference Pairs That Matter for Video-LLM Alignment",
+    author = "Kulkarni, Yogesh and Fazli, Pooyan",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    year = "2025",
+    pages = "32342--32367"}
 }</code></pre>
   </div>
 </section>
